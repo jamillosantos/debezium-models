@@ -17,8 +17,9 @@ const (
 
 type TimeMS int64
 
+// Time a microseconds to time.Time.
 func (t TimeMS) Time() time.Time {
-	return time.Unix(0, int64(t)*int64(time.Millisecond))
+	return time.Unix(int64(t)/int64(time.Millisecond), int64(t)%int64(time.Millisecond)).UTC()
 }
 
 type PostgresSource struct {
